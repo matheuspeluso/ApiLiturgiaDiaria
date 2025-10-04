@@ -1,12 +1,14 @@
-# models/entities/Liturgia.py
-from pydantic import BaseModel, Field
-from uuid import UUID, uuid4
-from datetime import date
+from sqlalchemy import Column, String, Date
+from sqlalchemy.dialects.postgresql import UUID
+from uuid import uuid4
+from infrastructure.factory.database import Base
 
-class LiturgiaDiaria(BaseModel):
-    id: UUID = Field(default_factory=uuid4)
-    primeiraLeitura: str
-    salmoResponsorial: str
-    segundaLeitura: str  
-    evangelho: str
-    data: date
+class Liturgia(Base):
+    __tablename__ = "liturgias"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4, unique=True, nullable=False)
+    primeira_leitura = Column(String, nullable=False)
+    salmo_responsorial = Column(String, nullable=False)
+    segunda_leitura = Column(String, nullable=True)
+    evangelho = Column(String, nullable=False)
+    data = Column(Date, nullable=False, unique=True)

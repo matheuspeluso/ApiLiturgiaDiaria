@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: postgres_liturgia
+    restart: always
+    environment:
+      POSTGRES_DB: DB_Liturgia
+      POSTGRES_USER: projeto_liturgia
+      POSTGRES_PASSWORD: fastapi2025
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_liturgia_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_liturgia_data:
